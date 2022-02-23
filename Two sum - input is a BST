@@ -1,0 +1,39 @@
+SOLUTION 1.) 
+======================================>
+
+class Solution:
+    def target(self, root, nodes, k):
+        
+        if root is None:
+            return False
+        complement = k - root.val
+        if complement in nodes:
+            return True
+        nodes.add(root.val)
+        return self.target(root.left, nodes, k) or self.target(root.right, nodes, k)
+        
+    def findTarget(self, root: Optional[TreeNode], k: int) -> bool:
+        if not root:
+            return False
+        return self.target(root, set(), k)
+        
+        
+SOLUTION 2.) 
+=========================================>
+
+class Solution:
+    def inorder(self, root):
+        return self.inorder(root.left)+[root.data]+self.inorder(root.right) if root else []
+        
+    def isPairPresent(self,root, target):
+        res = self.inorder(root)
+        low = 0 
+        high = len(res)-1
+        while(low < high):
+            if res[low]+res[high] == target:
+                return 1
+            elif res[low]+res[high] > target:
+                high -= 1
+            else:
+                low += 1 
+        return 0
