@@ -1,0 +1,23 @@
+# Binary tree node class for reference
+class BinaryTreeNode:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def getLeftView(root)->list:
+    
+    level = 0
+    ls = []
+    
+    def rightview(node, level, ls):
+        if node is None:
+            return 
+        if len(ls) == level:
+            ls.append(node.data)
+        rightview(node.left, level+1, ls)
+        rightview(node.right, level+1, ls)
+        
+    rightview(root, level, ls)
+    return ls
+                
