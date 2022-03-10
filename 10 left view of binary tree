@@ -10,14 +10,14 @@ def getLeftView(root)->list:
     level = 0
     ls = []
     
-    def rightview(node, level, ls):
+    def rightview(node, level):
         if node is None:
             return 
         if len(ls) == level:
             ls.append(node.data)
-        rightview(node.left, level+1, ls)
-        rightview(node.right, level+1, ls)
+        rightview(node.left, level+1)
+        rightview(node.right, level+1)
         
-    rightview(root, level, ls)
+    rightview(root, level)
     return ls
                 
