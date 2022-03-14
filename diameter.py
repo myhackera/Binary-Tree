@@ -4,6 +4,10 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+
+DIAMETER OF BINARY TREE : LONGEST PATH BETWEEN LEFTMOST AND THE RIGHTMOST NODE, 
+                          PATH SHOULD NOT BE PASS THROUGH ROOT NODE ( In counting we will deduct the count of root node )
+        
 class Solution:
     def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
         def heightOfTree(node):
