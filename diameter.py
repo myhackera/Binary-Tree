@@ -7,6 +7,9 @@
 
 DIAMETER OF BINARY TREE : LONGEST PATH BETWEEN TWO NODES, 
                           PATH SHOULD NOT BE PASS THROUGH ROOT NODE ( In counting we will deduct the count of root node )
+
+The nonlocal keyword is used to work with variables inside nested functions,
+where the variable should not belong to the inner function. Use the keyword nonlocal to declare that the variable is not local.
         
 class Solution:
     def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
