@@ -1,0 +1,42 @@
+class BinaryTreeNode:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def printleft(root, res):
+    if root:
+        if root.left:
+            res.append(root.data)
+            printleft(root.left, res)
+        elif root.right:
+            res.append(root.data)
+            printleft(root.right, res)
+            
+def printleaves(root, res):
+    if root:
+        printleaves(root.left, res)
+        if root.left is None and root.right is None:
+            res.append(root.data)
+        printleaves(root.right, res)
+            
+def printright(root, res):
+    if root:
+        if root.right:
+            printright(root.right, res)
+            res.append(root.data)
+        elif root.left:
+            printright(root.left, res)
+            res.append(root.data)
+        
+def traverseBoundary(root):
+    res = []
+    if root is None:
+        return res
+        
+    res.append(root.data)
+    printleft(root.left, res)
+    printleaves(root.left, res)
+    printleaves(root.right, res)
+    printright(root.right, res)
+    return res
