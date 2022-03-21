@@ -51,7 +51,33 @@ def findMaxSumPath(root):
     return ans
 
 
-
+SOLUTION 3.) ( GFG ACCEPTED )
+--------------------------------------------------------------
+class Solution:        
+    def maxPathSum(self, root):
+        
+        maxi = float('-inf')
+        
+        def dfs(root):
+            nonlocal maxi
+            if root is None:
+                return 0
+            lsum = dfs(root.left)
+            rsum = dfs(root.right)
+            if root.left is None and root.right is None:
+                return root.data
+            if root.left is None:
+                return root.data + rsum
+            if root.right is None:
+                return root.data + lsum
+            maxi = max(maxi, lsum+rsum+root.data)
+            return max(lsum, rsum)+root.data
+            
+        
+        ans = dfs(root)
+        if root.left is None or root.right is None:
+            maxi = max(maxi, ans)
+        return maxi
 
 
 
