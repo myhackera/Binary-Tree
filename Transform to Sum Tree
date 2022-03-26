@@ -1,0 +1,15 @@
+class Solution:
+    def toSumTree(self, root) :
+        
+        def dfs(root):
+            
+            if root is None:
+                return 0
+            left = dfs(root.left)
+            right = dfs(root.right)
+            temp = root.data
+            root.data = left + right
+            return left+right+temp
+            
+        dfs(root)
+        
