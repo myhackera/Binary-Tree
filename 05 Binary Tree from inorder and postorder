@@ -1,9 +1,6 @@
-# Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
+SOLUTION 1.)
+-------------------------------------------------------->>>>>>>
+
 class Solution:
     def build(self, postorder, d, beg, end):
         if beg > end: 
@@ -18,4 +15,19 @@ class Solution:
     def buildTree(self, inorder: List[int], postorder: List[int]) -> Optional[TreeNode]:
         d = {v:i for i,v in enumerate(inorder)}
         return self.build(postorder, d, 0, len(inorder)-1)
+   
+SOLUTION 2.)
+---------------------------------------------------->>>>>>>
+( Efficient )
+
+def buildTree(In, post, n):
     
+    def dfs(In, post, n):
+        if In:
+            index = In.index(post.pop())
+            root = Node(In[index])
+            root.right = dfs(In[index+1:], post, n)
+            root.left = dfs(In[:index], post, n)
+            return root
+    
+    return dfs(In, post, n)
