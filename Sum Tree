@@ -1,0 +1,63 @@
+SOLUTION 1.)
+------------------------------------------------->>>
+
+class Solution:
+    def sum(self, root):
+        if root is None:
+            return 0
+        else:
+            return self.sum(root.left) + root.data + self.sum(root.right)
+        
+        
+    def isSumTree(self,root):
+        
+        if root is None or root.left is None or root.right is None:
+            return 1
+        
+        left = self.sum(root.left)
+        right = self.sum(root.right)
+        
+        if left + right == root.data and self.isSumTree(root.left) and self.isSumTree(root.right):
+            return 1
+        
+        return 0
+        
+        
+TC : O(N^2)
+
+SOLUTION 2.)
+------------------------------------------------>>>
+
+class Solution:
+        
+        
+    def isSumTree(self,root):
+        
+        def checksum(root):
+        
+            nonlocal res
+            
+            if root is None:
+                return 0
+            
+            if not res:  # No need to traverse further if substree is already False
+                return 0
+            
+            if root.left is None and root.right is None:   # if it is leaf node than it is sum tree
+                return root.data
+            
+            l = checksum(root.left)
+            r = checksum(root.right)
+            
+            if l+r != root.data:
+                res = False
+                return 0
+                
+            return l+r+root.data
+            
+        
+        res = True
+        checksum(root)
+        return res
+        
+TC : O(N)
