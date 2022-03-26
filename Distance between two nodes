@@ -1,0 +1,74 @@
+SOLUTION 1.) 
+---------------------------------------------
+
+def pathtonode(root,path,k):
+
+    if root is None:
+        return False
+    path.append(root)
+    if(root.data == k):
+        return True
+    if((root.left != None and pathtonode(root.left,path,k))or(root.right != None and pathtonode(root.right,path,k))):
+        return True
+    path.pop()
+    return False
+    
+    
+def findDist(root,a,b):
+   
+    if(root):
+        path1 = []
+        pathtonode(root,path1,a)
+        path2 = []
+        pathtonode(root,path2,b)
+        i = 0
+        while(i<len(path1) and (i<len(path2))):
+            if(path1[i] != path2[i]):
+                break
+            i = i + 1
+        return len(path1)+len(path2)-(2*i)
+    else:
+        return 0
+        
+        
+SOLUTION 2.)     [ EFFICIENT SOLUTION ]
+-------------------------------------------------
+
+class Solution:
+    def finddis(self, root, node, dist):
+        if root is None:
+            return None
+        if root.data == node:
+            return dist
+        left = self.finddis(root.left, node, dist+1)
+        if left:
+            return left
+        right = self.finddis(root.right, node, dist+1)
+        return right
+        
+        
+    def findlca(self, root, a, b):
+        
+        if root is None:
+            return 
+        if root.data == a or root.data == b:
+            return root
+            
+        left = self.findlca(root.left, a, b)
+        right = self.findlca(root.right, a, b)
+        
+        if left and right:
+            return root
+        if left:
+            return left
+        else:
+            return right
+        
+        
+    def findDist(self,root,a,b):
+    
+        lca = self.findlca(root, a, b)
+        l = self.finddis(lca, a, 0)
+        r = self.finddis(lca, b, 0)
+        
+        return (l+r)
