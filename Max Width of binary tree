@@ -24,3 +24,26 @@ class Solution:
         for level in range(1, self.height(root)+1):
             maxWidth = max(maxWidth, self.getWidth(root, level))
         return maxWidth
+        
+        
+Solution 2.)
+================================>>>>>>
+
+class Solution:
+    def widthOfBinaryTree(self, root: Optional[TreeNode]) -> int:
+        
+        d = defaultdict(list)
+        
+        def dfs(node, level, column):
+            if node:
+                d[level].append(column)
+                dfs(node.left, level+1, 2*column)
+                dfs(node.right, level+1, 2*column+1)
+
+        dfs(root, 0, 0)
+        
+        maxWidth = 0
+        for level in d:
+            maxWidth = max(maxWidth, max(d[level]) - min(d[level]))
+        return maxWidth + 1
+        
