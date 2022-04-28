@@ -19,3 +19,22 @@ class Solution:
             return True
         return False
             
+
+Solution 2.)
+=============>>>>
+class Solution:
+    
+    def isBalanced(self, root: Optional[TreeNode]) -> bool:
+        
+        
+        def dfs(node):
+            if node is None:
+                return 0
+            left = dfs(node.left)
+            right = dfs(node.right)
+            if left == -1 or right == -1 or abs(left-right) > 1:
+                return -1
+            return 1 + max(left, right)
+        
+        return dfs(root) != -1
+            
