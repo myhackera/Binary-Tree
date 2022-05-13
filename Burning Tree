@@ -1,0 +1,57 @@
+
+class Solution:
+    def findmin(self, target, d):
+        
+        q = []
+        q.append(target)
+        vis = {}
+        vis[target] = 1
+        maxi = 0
+        
+        while q:
+            size = len(q)
+            flag = 0
+            for i in range(size):
+                temp = q.pop(0)
+                if temp.left and temp.left not in vis:
+                    flag = 1
+                    vis[temp.left] = temp
+                    q.append(temp.left)
+                if temp.right and temp.right not in vis:
+                    flag = 1
+                    vis[temp.right] = temp
+                    q.append(temp.right)
+                if temp in d and d[temp] not in vis:
+                    flag = 1
+                    vis[d[temp]] = 1
+                    q.append(d[temp])
+            if flag:
+                maxi += 1
+        return maxi
+    
+    def bfstomap(self, root, d, target):
+        
+        q = []
+        q.append(root)
+        res = -111
+        
+        while q:
+            
+            temp = q.pop(0)
+            if temp.data == target:
+                res = temp
+            if temp.left:
+                d[temp.left] = temp
+                q.append(temp.left)
+            if temp.right:
+                d[temp.right] = temp
+                q.append(temp.right)
+        
+        return res
+    
+    def minTime(self, root,target):
+        
+        d = {}
+        Target = self.bfstomap(root, d, target)
+        maxi = self.findmin(Target, d)
+        return maxi
