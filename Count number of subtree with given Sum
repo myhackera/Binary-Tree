@@ -1,0 +1,20 @@
+def countSubtreesWithSumX(root, x):
+
+    cnt = 0
+    
+    def dfs(root, x):
+        
+        nonlocal cnt
+        if root is None: return 0
+        
+        lsum = dfs(root.left, x)
+        rsum = dfs(root.right, x)
+        
+        if lsum+rsum+root.data == x:
+            cnt += 1
+        
+        
+        return lsum+rsum+root.data
+        
+    dfs(root, x)
+    return cnt
