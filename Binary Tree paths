@@ -1,0 +1,19 @@
+class Solution:
+    def binaryTreePaths(self, root: Optional[TreeNode]) -> List[str]:
+        
+        if not root:
+            return []
+        
+        def find_path(root, ls, res):
+            
+            if not root.left and not root.right:
+                res.append(ls+str(root.val))
+                
+            if root.left:
+                find_path(root.left, ls+str(root.val)+"->", res)
+            if root.right:
+                find_path(root.right, ls+str(root.val)+"->", res)
+            
+        res = []
+        find_path(root, "", res)
+        return res
