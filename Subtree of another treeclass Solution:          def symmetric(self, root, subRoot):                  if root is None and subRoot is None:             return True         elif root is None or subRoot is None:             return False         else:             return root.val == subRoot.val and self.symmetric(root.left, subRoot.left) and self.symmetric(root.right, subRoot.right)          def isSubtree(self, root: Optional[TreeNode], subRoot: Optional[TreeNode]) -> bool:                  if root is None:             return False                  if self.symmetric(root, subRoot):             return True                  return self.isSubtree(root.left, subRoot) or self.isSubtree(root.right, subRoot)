@@ -1,0 +1,20 @@
+class Solution:
+    
+    def symmetric(self, root, subRoot):
+        
+        if root is None and subRoot is None:
+            return True
+        elif root is None or subRoot is None:
+            return False
+        else:
+            return root.val == subRoot.val and self.symmetric(root.left, subRoot.left) and self.symmetric(root.right, subRoot.right)
+    
+    def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
+        
+        if root is None:
+            return False
+        
+        if self.symmetric(root, subRoot):
+            return True
+        
+        return self.isSubtree(root.left, subRoot) or self.isSubtree(root.right, subRoot) 
