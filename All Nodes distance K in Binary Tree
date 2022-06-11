@@ -1,0 +1,38 @@
+class Solution:
+    def make_parent(self, root, par):
+        
+        q = [root]
+        par[root] = None
+        while q:
+            node = q.pop(0)
+            if node.left:
+                q.append(node.left)
+                par[node.left] = node
+            if node.right:
+                q.append(node.right)
+                par[node.right] = node
+        
+        
+    def distanceK(self, root: TreeNode, target: TreeNode, k: int) -> List[int]:
+        
+        par = {}
+        self.make_parent(root, par)
+        vis = set()
+        
+        q = []
+        q.append([target, 0])
+        res = []
+        
+        while q:
+            node, dis = q.pop(0)
+            if node not in vis:
+                if dis == k: res.append(node.val)
+                vis.add(node)
+                
+                if node.left:
+                    q.append([node.left, dis+1])
+                if node.right:
+                    q.append([node.right, dis+1])
+                if par[node]:
+                    q.append([par[node], dis+1])
+        return res
