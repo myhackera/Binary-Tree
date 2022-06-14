@@ -1,0 +1,48 @@
+USING DFS
+====>>>>>>>>>>>
+
+class Solution:
+    def pathSum(self, root: Optional[TreeNode], targetSum: int) -> List[List[int]]:
+        
+        if not root:
+            return []
+        res = []
+        
+        def dfs(root, lis, targetSum):
+            
+            if not root:
+                return 
+            if root.left is None and root.right is None and targetSum == root.val:
+                lis.append(root.val)
+                res.append(lis)
+                
+                
+            dfs(root.left, lis+[root.val], targetSum - root.val)
+            dfs(root.right, lis+[root.val], targetSum - root.val)
+            
+        
+        dfs(root, [], targetSum)
+        return res
+        
+USING BFS:
+===>>>>>>>>
+        
+        
+class Solution:
+    def pathSum(self, root: Optional[TreeNode], targetSum: int) -> List[List[int]]:
+
+        if not root:
+            return []
+        res = []
+        q = [[root, root.val, [root.val]]]
+        
+        while q:
+            node, summ, ls = q.pop(0)
+            if node.left is None and node.right is None and summ == targetSum:
+                res.append(ls)
+            if node.left:
+                q.append([node.left, summ+node.left.val, ls+[node.left.val]])
+            if node.right:
+                q.append([node.right, summ+node.right.val, ls+[node.right.val]])
+        
+        return res
