@@ -1,0 +1,25 @@
+class Solution:
+    def averageOfSubtree(self, root: Optional[TreeNode]) -> int:
+        
+        res = 0
+        
+        def traverse(root):
+            
+            nonlocal res
+            
+            if not root: return 0, 0
+            
+            left_sum, left_count = traverse(root.left)
+            right_sum, right_count = traverse(root.right)
+            
+            s = left_sum + root.val + right_sum
+            c = 1 + left_count + right_count
+            
+            if s//c == root.val:
+                res += 1
+                
+            return s, c
+        
+        
+        traverse(root)
+        return res
