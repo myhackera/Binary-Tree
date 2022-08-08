@@ -1,0 +1,13 @@
+class Solution:
+    def bstToGst(self, root: TreeNode) -> TreeNode:
+        
+        def dfs(root, summ):
+            
+            if not root: return 
+            dfs(root.right, summ)
+            summ.val += root.val
+            root.val = summ.val
+            dfs(root.left, summ)
+        
+        dfs(root, TreeNode(0))
+        return root
