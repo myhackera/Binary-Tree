@@ -1,0 +1,48 @@
+Solution 1.) 
+============>>>
+
+def findKthAncestor(root, targetNodeVal, k):
+    ans = -1
+    def dfs(root, path):
+        nonlocal ans
+        if not root: return 
+        if root.data == targetNodeVal:
+            if len(path) >= k:
+                ans = path[-k]
+                return 
+        path.append(root.data)
+        dfs(root.left, path)
+        dfs(root.right, path)
+        path.pop()
+        return 
+    dfs(root, [])
+    return ans
+    
+Solution 2.) 
+============>>>
+
+def findKthAncestor(root, node, k):
+    d = {}
+    def bfs(root):
+        d[root.data] = -1
+        q = []
+        q.append(root)
+        while q:
+            temp = q.pop(0)
+            if temp.left:
+                d[temp.left.data] = temp.data
+                q.append(temp.left)
+            if temp.right:
+                d[temp.right.data] = temp.data
+                q.append(temp.right)
+    
+    bfs(root)
+    count = 0
+    while node != -1:
+        node = d[node]
+        count += 1
+        if count == k:
+            break
+    return node
+
+    
