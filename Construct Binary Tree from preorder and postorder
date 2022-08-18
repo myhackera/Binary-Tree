@@ -1,0 +1,21 @@
+class Solution:
+    def constructFromPrePost(self, preorder: List[int], postorder: List[int]) -> Optional[TreeNode]:
+        
+        
+        def dfs(pre, post):
+            
+            if not pre:
+                return None
+            if len(pre) == 1:
+                return TreeNode(post.pop())
+            
+            node = TreeNode(post.pop())
+            index = pre.index(post[-1])
+            
+            node.right = dfs(pre[index:], post)
+            node.left = dfs(pre[1:index], post)
+            
+            return node
+        
+        return dfs(preorder, postorder)
+            
