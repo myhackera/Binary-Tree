@@ -1,0 +1,26 @@
+class Solution:
+    def pathSum(self, root: Optional[TreeNode], targetSum: int) -> int:
+        
+        if not root: return 0
+        cnt = 0
+        
+        def find_path_from_node(root, target):
+            
+            nonlocal cnt
+            if not root: return 
+            if root.val == target: cnt += 1
+                
+            find_path_from_node(root.left, target-root.val)
+            find_path_from_node(root.right, target-root.val)
+        
+        def dfs(root):
+            
+            if not root: return 
+            find_path_from_node(root, targetSum)
+            
+            dfs(root.left)
+            dfs(root.right)
+        
+        dfs(root)
+        return cnt
+            
