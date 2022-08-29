@@ -26,3 +26,31 @@ class Solution:
         dfs(root)
         return cnt
             
+
+class Solution:
+    def pathSum(self, root: Optional[TreeNode], targetSum: int) -> int:
+        
+        d = {0:1}
+        
+        def dfs(root, currsum, target):
+            
+            if not root: return 0
+                
+            currsum += root.val
+            res = 0
+
+            if currsum-target in d:
+                res += d[currsum-target]
+
+            if currsum in d:
+                d[currsum] += 1
+            else:
+                d[currsum] = 1
+
+            res += dfs(root.left, currsum, target)
+            res += dfs(root.right, currsum, target)
+
+            d[currsum] -= 1
+            return res 
+            
+        return dfs(root, 0, targetSum)
