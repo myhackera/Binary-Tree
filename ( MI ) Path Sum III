@@ -4,19 +4,21 @@ class Solution:
         if not root: return 0
         cnt = 0
         
-        def find_path_from_node(root, target):
+        def find_path_from_node(root, target, currsum):
             
             nonlocal cnt
             if not root: return 
-            if root.val == target: cnt += 1
+            currsum += root.val
+            if currsum == target:
+                cnt += 1
                 
-            find_path_from_node(root.left, target-root.val)
-            find_path_from_node(root.right, target-root.val)
+            find_path_from_node(root.left, target, currsum)
+            find_path_from_node(root.right, target, currsum)
         
         def dfs(root):
             
             if not root: return 
-            find_path_from_node(root, targetSum)
+            find_path_from_node(root, targetSum, 0)
             
             dfs(root.left)
             dfs(root.right)
