@@ -1,0 +1,13 @@
+class Solution:
+    def check(self, root):
+        
+        def dfs(root, s, level):
+            
+            if not root: return 
+            if not root.left and not root.right: s.add(level)
+            dfs(root.left, s, level+1)
+            dfs(root.right, s, level+1)
+       
+        s = set()
+        dfs(root, s, 0)
+        return len(s) == 1 
