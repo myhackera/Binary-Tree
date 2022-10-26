@@ -1,0 +1,16 @@
+def verticalWidth(root):
+    if root is None:
+        return 0
+    left, right = 0, 0
+    
+    def dfs(root, l):
+        nonlocal left, right
+        if not root:
+            return 
+        left = min(left, l)
+        right = max(right, l)
+        dfs(root.left, l-1)
+        dfs(root.right, l+1)
+        
+    dfs(root, 0)
+    return right-left+1
