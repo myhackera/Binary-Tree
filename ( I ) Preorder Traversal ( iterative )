@@ -1,0 +1,16 @@
+class Solution:
+    # Return a list containing the preorder traversal of the given tree
+    def preOrder(self, root):
+        
+        ans = []
+        s = [root]
+        
+        while s:
+            node = s.pop()
+            ans.append(node.data)
+            if node.right:
+                s.append(node.right)
+            if node.left:
+                s.append(node.left)
+                
+        return ans
