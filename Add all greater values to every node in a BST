@@ -1,0 +1,18 @@
+def modify(root):
+    
+    ans = []
+    sum = 0
+    
+    def dfs(root):
+        
+        nonlocal sum
+        if not root: return
+        dfs(root.right)
+        sum += root.data
+        root.data = sum
+        dfs(root.left)
+        
+        
+    dfs(root)
+    return root
+    
