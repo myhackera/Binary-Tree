@@ -1,0 +1,20 @@
+from collections import defaultdict
+
+class Solution:
+    #Complete the function below
+    def verticalSum(self, root):
+        
+        d = defaultdict(list)
+        def dfs(root, d, width):
+            
+            if not root: return 
+            d[width].append(root.data)
+            dfs(root.left, d, width-1)
+            dfs(root.right, d, width+1)
+                
+        dfs(root, d, 0)
+        ans = []
+        for vals in sorted(d.keys()):
+            ans.append(sum(d[vals]))
+        return ans
+        
