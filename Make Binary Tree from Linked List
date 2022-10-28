@@ -1,0 +1,16 @@
+def convert(head):
+  
+    temp = []
+    tmp = head
+    while tmp:
+        temp.append(Tree(tmp.data))
+        tmp = tmp.next
+    
+    n = len(temp)
+    for i in range(n):
+        if 2*i+1 < n:
+            temp[i].left = temp[2*i+1]
+        if 2*i+2 < n:
+            temp[i].right = temp[2*i+2]
+    root = temp[0]
+    return root
