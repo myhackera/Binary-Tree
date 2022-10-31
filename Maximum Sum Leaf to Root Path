@@ -1,0 +1,20 @@
+import sys
+class Solution:
+    def maxPathSum(self, root):
+        
+        ans = -sys.maxsize
+    
+        def dfs(root, summ):
+            nonlocal ans
+            if not root:
+                return 
+            if not root.left and not root.right:
+                ans = max(ans, summ+root.data)
+            summ += root.data
+            dfs(root.left, summ)
+            dfs(root.right, summ)
+            summ -= root.data
+            
+            
+        dfs(root, 0)
+        return ans
