@@ -20,4 +20,24 @@ def getLeftView(root)->list:
         
     rightview(root, level)
     return ls
-                
+
+BEST VERSION :
++++++++++++++++>>>
+
+def LeftView(root):
+    
+    d = {}
+    ans = []
+    def dfs(root, height):
+        nonlocal d
+        if not root:
+            return
+        if height not in d:
+            d[height] = root.data
+        dfs(root.left, height+1)
+        dfs(root.right, height+1)
+    
+    dfs(root, 0)
+    for v in sorted(d.keys()):
+        ans.append(d[v])
+    return ans
