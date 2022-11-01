@@ -16,3 +16,21 @@ class Solution:
         
         dfs(root)
         return flag
+        
+MOST OPTIMISED 
+-------------->>>>
+        
+class Solution:
+    def hasPathSum(self,root, S):
+        
+        def dfs(root, target, summ):
+            if not root:
+                return False
+            summ += root.data
+            if not root.left and not root.right: 
+                return summ == target
+            left = dfs(root.left, target, summ)
+            right = dfs(root.right, target, summ)
+            return left or right
+        
+        return dfs(root, S, 0)
