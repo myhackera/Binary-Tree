@@ -1,0 +1,18 @@
+class Solution:
+    def hasPathSum(self,root, S):
+        
+        flag = summ = 0
+        def dfs(root):
+            nonlocal flag, summ
+            if not root:
+                return 
+            if not root.left and not root.right:
+                if summ+root.data == S:
+                    flag = 1
+            summ += root.data
+            dfs(root.left)
+            dfs(root.right)
+            summ -= root.data
+        
+        dfs(root)
+        return flag
